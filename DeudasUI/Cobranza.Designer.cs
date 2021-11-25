@@ -224,9 +224,9 @@ namespace DeudasUI
             // 
             // txtPunitario
             // 
-            this.txtPunitario.Enabled = false;
             this.txtPunitario.Location = new System.Drawing.Point(178, 87);
             this.txtPunitario.Name = "txtPunitario";
+            this.txtPunitario.ReadOnly = true;
             this.txtPunitario.Size = new System.Drawing.Size(100, 20);
             this.txtPunitario.TabIndex = 0;
             // 

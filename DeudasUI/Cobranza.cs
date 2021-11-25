@@ -112,6 +112,10 @@ namespace DeudasUI
             txtFecPago.Clear();
             txtfecVenc.Clear();
             txtImporteAde.Clear();
+            txtInteresPuni.Clear();
+            txtPunitario.Clear();
+            txtImporteTotal.Clear();
+          
         }
         private void Calculos()
         {
@@ -119,8 +123,11 @@ namespace DeudasUI
             {
                 OperarioFormulario operario = new OperarioFormulario(_pagos);
                 diasAtrasoProm.Text = operario.PromediDias().ToString();
-                txtInteresProm.Text = operario.Interesdias().ToString();
-            }catch(Exception ex)
+                txtInteresProm.Text = operario.Interesdias().ToString("0.00");
+                diasAtrasoProm.ReadOnly = true;
+                txtInteresProm.ReadOnly = true;
+            }
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -132,7 +139,6 @@ namespace DeudasUI
             {
                 Pago pago = Pago();
                 pago.Usuario = usuario;
-                pago.IdServicio = pago.Servicio.Id;
                 TransactionResult resultado = _PagoServicio.EnviarNuevoPago(pago);
                 MessageBox.Show("Pago exitoso");
                 Refrescar();
@@ -152,9 +158,9 @@ namespace DeudasUI
             p.FechaVencimiento = DateTime.Parse(txtfecVenc.Text);
             p.FechaPago = DateTime.Parse(txtFecPago.Text);
             p.FechaPago = DateTime.Parse(txtFecPago.Text);
+            p.IdServicio = ((Servicio)cbServicio.SelectedItem).Id;
             p.Servicio = new Servicio();
-            p.Servicio = ServicioHelper.ServicioPorId(((Servicio)cbServicio.SelectedItem).Id);
-            
+            p.Servicio = ServicioHelper.ServicioPorId(p.IdServicio);
             p.InteresPunitario = double.Parse(txtInteresPuni.Text);
             
             

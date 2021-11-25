@@ -28,9 +28,12 @@ namespace Deudas.Entidades.Dominio
         public double PunitarioDiario { get => this._punitarioDiario; set => this._punitarioDiario = value; }
         public string Nombre { get => this._nombre; set => this._nombre = value; }
 
+        
+
         public override string ToString()
         {
             return $"Id{this._id}-{this._nombre}";
         }
+        public string Mostrar { get { return this._nombre; } }
     }
 }

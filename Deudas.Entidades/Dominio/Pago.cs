@@ -38,6 +38,7 @@ namespace Deudas.Entidades.Dominio
             this._servicio = new Servicio();
         }
 
+        public Servicio Servicio { get => this._servicio; set => this._servicio = value; }
         public int Id { get => this._id; set => this._id = value; }
         public int IdServicio { get => this._idServicio; set => this._idServicio = value; }
         public int IdCliente { get => this._idCliente; set => this._idCliente = value; }
@@ -45,7 +46,7 @@ namespace Deudas.Entidades.Dominio
         public DateTime FechaPago { get => this._fechaPago; set => this._fechaPago = value; }
         public double ImporteAdeudado { get => this._importeAdeudado; set => this._importeAdeudado = value; }
         public string Usuario { get => this._usuario; set => this._usuario = value; }
-        public Servicio Servicio { get => this._servicio; set => this._servicio = value; }
+       
 
         //autocalculables
         public double InteresPunitario { get => _interesPunitario = (FechaPago - FechaVencimiento).Days * Servicio.PunitarioDiario; set => _interesPunitario = value; }
@@ -59,14 +60,9 @@ namespace Deudas.Entidades.Dominio
         }
         public string MostrarEnLista
         {
-            get { return $"{Id}- Importe total: {ImporteTotal.ToString("0.00")}"; }
+            get { return $"{Id}-{this.Servicio.Mostrar}-Importe total: {ImporteTotal.ToString("0.00")}"; }
         }
 
-        public Servicio CargarServicio(int idServicio) 
-        {
-            _servicio = ServicioHelper.ServicioPorId(IdServicio);
-            return _servicio;
-        }
 
      
     }

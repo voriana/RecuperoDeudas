@@ -14,7 +14,7 @@ namespace Deudas.Entidades.Helpers
         {
             //inicializo la lista
             _lstServicio = new List<Servicio>();
-            Servicio servicio0 = new Servicio(0, "--SELECCIONE--",0);
+            Servicio servicio0 = new Servicio(0, "SELECCIONE",0);
             Servicio servicio1 = new Servicio(1, "Edenor", 8.45);
             Servicio servicio2 = new Servicio(2, "Expensa", 5.20);
             Servicio servicio3 = new Servicio(3, "Telecom", 2.21);

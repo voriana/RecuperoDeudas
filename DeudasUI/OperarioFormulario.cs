@@ -26,33 +26,30 @@ namespace DeudasUI
         public double PromediDias()
         {
 
-            int contador = 0;
             int acumulador = 0;
 
             foreach (Pago pago in _pagos)
             {
-                contador += 1;
+               
                 if ((pago.FechaPago - pago.FechaVencimiento).Days > 0) //esta atrasado
                 {
                     
                     acumulador += (pago.FechaPago - pago.FechaVencimiento).Days;
                 }
             }
-            PromedioDias = acumulador / contador;
+            PromedioDias = acumulador / _pagos.Count();
             return  PromedioDias;
         }
         public double Interesdias()
         {
-
-            int contador = 0;
             double acumulador = 0;
 
             foreach (Pago pago in _pagos)
             {
                 acumulador += pago.InteresPunitario;
-                contador++;
+                
             }
-            PromedioInteres = acumulador / contador;
+            PromedioInteres = acumulador / _pagos.Count();
             return PromedioInteres;
         }
     }
