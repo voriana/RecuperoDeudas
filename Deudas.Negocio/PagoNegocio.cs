@@ -37,5 +37,11 @@ namespace Deudas.Negocio
             }
             return _pagos;
        } 
+       public TransactionResult EnviarNuevoPago(Pago pago)
+        {
+        TransactionResult resultado = _pagoMapper.PostPago(pago);
+            return resultado;
+        }
+       
     }
 }

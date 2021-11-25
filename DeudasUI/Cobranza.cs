@@ -18,6 +18,7 @@ namespace DeudasUI
         private List<Pago> _pagos;
         private PagoNegocio _PagoServicio;
         private List<Servicio> _servicios;
+        string usuario = "890175";
         public Cobranza()
         {
             InitializeComponent();
@@ -29,13 +30,15 @@ namespace DeudasUI
         {
             CargaLista();
             CargaComboServicio();
+            Refrescar();
         }
 
         private void CargaLista()
         {
-            _pagos = _PagoServicio.ListaPagos();
+            _pagos = _PagoServicio.ListarPagosConServicio();
             lstPagos.DataSource = null;
             lstPagos.DataSource = _pagos;
+            lstPagos.DisplayMember = "MostrarEnlista";
         }
 
         private void CargaComboServicio()
@@ -45,95 +48,116 @@ namespace DeudasUI
             cbServicio.DataSource = _servicios;
             cbServicio.DisplayMember = "Nombre";
         }
-        private void cbServicio_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbServicio.SelectedIndex > -1)
-            {
-                Servicio servicio = (Servicio)cbServicio.SelectedItem;
-                txtInteresPuni.Text = servicio.PunitarioDiario.ToString("0.00");
-            }
-            else
-            {
-                throw new Exception("Debe seleccionar un item");
-            }
-        }
-
+     
+        //boton calcular
         private void btCalcular_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!string.IsNullOrEmpty(txtImporteAde.Text))
-                {   
-                
-                    if (double.TryParse(txtImporteAde.Text, out double salida))
-                    {
-                        importeAdeudado = Convert.ToDouble(salida.ToString("0.00"));
-                        
-                    }
-                    else
-                    {
-                        txtImporteAde.Focus();
-                        txtImporteAde.BackColor = Color.Red;
-                        throw new Exception("Debe ingresar un valor numerico");
-                    }
+                Validaciones();
+                Pago p = Pago();
+                txtPunitario.Text = p.InteresPunitario.ToString();
+                txtImporteTotal.Text = p.ImporteTotal.ToString("0.00");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        //validaciones
+        private void Validaciones()
+        {
+            Servicio servicio = (Servicio)cbServicio.SelectedItem;
+            double importe;
+            DateTime fechaVenc;
+            DateTime fechaPago;
+
+            if (servicio.Id==0)
+            {
+                throw new Exception("Debe seleccionar un servicio");
+            }
+            if (txtImporteAde.Text==""||txtfecVenc.Text==""||txtFecPago.Text=="")
+            {
+                throw new Exception("Debe completar todos los campos");
+            }
+            else
+            {
+                if(!double.TryParse(txtImporteAde.Text, out double salida))
+                {
+                    throw new Exception("Debe ingresar un valor numerico");
                 }
                 else
                 {
-                    txtImporteAde.Focus();
-                    txtImporteAde.BackColor = Color.Red;
-                    throw new Exception("El campo no puede estar vacio");
-                }
-                if (!(txtfecVenc.Text == ""))
-                {
-                    if (DateTime.TryParse(txtfecVenc.Text, out DateTime resul))
-                    {
-                        fechaVenc =Convert.ToDateTime(resul.ToString("yyyy-MM-dd"));
-                    }
-                    else
-                    {
-                        txtfecVenc.Focus();
-                        txtfecVenc.BackColor = Color.Red;
-                        throw new Exception("Formato invalido");
-                    }
-                }
-                else
-                {
-                    txtfecVenc.Focus();
-                    txtfecVenc.BackColor = Color.Red;
-                    throw new Exception("El campo no puede estar vacio");
-                }
-                if (!(txtFecPago.Text == ""))
-                {
-                    if (DateTime.TryParse(txtFecPago.Text, out DateTime resul))
-                    {
-                        fechaPago = Convert.ToDateTime(resul.ToString("yyyy-MM-dd"));
-                    }
-                    else
-                    {
-                        txtFecPago.Focus();
-                        txtFecPago.BackColor = Color.Red;
-                        throw new Exception("Formato invalido");
-                    }
-                }
-                else
-                {
-                    txtFecPago.Focus();
-                    txtFecPago.BackColor = Color.Red;
-                    throw new Exception("El campo no puede estar vacio");
+                    importe = Convert.ToDouble(txtImporteAde.Text);
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            if(!DateTime.TryParse(txtfecVenc.Text, out DateTime  vencimiento)|| !DateTime.TryParse(txtFecPago.Text, out DateTime pago))
+            {
+                throw new Exception("Formato de fecha invalido");
+            }
+            else
+            {
+                fechaVenc = vencimiento;
+                fechaPago = pago;
+            }
         }
-     
-        int id;
-        int idServicio;
-        int idCliente;
-        DateTime fechaVenc;
-        DateTime fechaPago;
-        double importeAdeudado;
-        double interesPunitario =0;
-        string usuario="890175";
+        private void cbServicio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Servicio servicio = (Servicio)cbServicio.SelectedItem;
+            txtInteresPuni.Text = servicio.PunitarioDiario.ToString("0.00");
+        }
+        private void Limpiar()
+        {
+            cbServicio.SelectedIndex = -1;
+            txtFecPago.Clear();
+            txtfecVenc.Clear();
+            txtImporteAde.Clear();
+        }
+        private void Calculos()
+        {
+            try
+            {
+                OperarioFormulario operario = new OperarioFormulario(_pagos);
+                diasAtrasoProm.Text = operario.PromediDias().ToString();
+                txtInteresProm.Text = operario.Interesdias().ToString();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
+        private void btnPagar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Pago pago = Pago();
+                pago.Usuario = usuario;
+                TransactionResult resultado = _PagoServicio.EnviarNuevoPago(pago);
+                MessageBox.Show("Pago exitoso");
+                Refrescar();
+            }
+            catch(Exception es)
+            {
+                MessageBox.Show(es.Message);
+            }
+        }
 
+        //metodo para setear valores de un pago
+        private Pago Pago()
+        {
+            Pago p = new Pago();
+            p.ImporteAdeudado = double.Parse(txtImporteAde.Text.ToString());
+            p.FechaVencimiento = DateTime.Parse(txtfecVenc.Text);
+            p.FechaPago = DateTime.Parse(txtFecPago.Text);
+            p.Servicio.Id = ((Servicio)cbServicio.SelectedItem).Id;
+            p.InteresPunitario = double.Parse(txtInteresPuni.Text);
+            return p;
+        }
+  
+        private void Refrescar()
+        {   _pagos= _PagoServicio.ListarPagosConServicio();
+            lstPagos.DataSource = _pagos;
+            Calculos();
+        }
     }
 }

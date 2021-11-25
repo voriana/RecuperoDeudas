@@ -18,7 +18,10 @@ namespace Deudas.Entidades.Dominio
         private double _importeTotal;
         private string _usuario;
         private Servicio _servicio;
-       
+
+        public Pago()
+        {
+        }
 
         public Pago(int id, int idServicio, int idCliente, DateTime fechaVencimiento, DateTime fechaPago, double importeAdeudado, double interesPunitario, double importeTotal, string usuario)
         {
@@ -31,8 +34,6 @@ namespace Deudas.Entidades.Dominio
             _interesPunitario = interesPunitario;
             _importeTotal = importeTotal;
             _usuario = usuario;
-
-            
         }
 
         public int Id { get => _id; set => _id = value; }
@@ -45,12 +46,18 @@ namespace Deudas.Entidades.Dominio
         public Servicio Servicio { get => _servicio; set => _servicio = value; }
 
         //autocalculables
-        public double InteresPunitario { get => _interesPunitario; set => _interesPunitario = (FechaPago - FechaVencimiento).TotalDays * Servicio.PunitarioDiario; }
-        public double ImporteTotal { get => _importeTotal; set => _importeTotal = ImporteAdeudado + InteresPunitario; }
+        public double InteresPunitario { get => _interesPunitario = (FechaPago - FechaVencimiento).Days * Servicio.PunitarioDiario; set => _interesPunitario = value; }
+        public double ImporteTotal { get => (ImporteAdeudado + InteresPunitario); }
+
+        private int AtrasadoDias { get => (FechaPago - FechaVencimiento).Days; }
 
         public override string ToString()
         {
-            return $"id{Id}-{Servicio}- Importe total: {ImporteTotal}";
+            return $"idPago{Id}-Servicio {Servicio}";
+        }
+        public string MostrarEnLista()
+        {
+            return $"{Id}-Servicio {Servicio.Nombre!= "--SELECCIONE--"} Importe total: {ImporteTotal.ToString("0.00")}";
         }
 
 

@@ -40,7 +40,7 @@ namespace DeudasUI
             this.lbServicio = new System.Windows.Forms.Label();
             this.lbTituloPago = new System.Windows.Forms.Label();
             this.cbServicio = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnPagar = new System.Windows.Forms.Button();
             this.btCalcular = new System.Windows.Forms.Button();
             this.txtImporteTotal = new System.Windows.Forms.TextBox();
             this.txtInteresPuni = new System.Windows.Forms.TextBox();
@@ -53,7 +53,7 @@ namespace DeudasUI
             this.lbTituloMora = new System.Windows.Forms.Label();
             this.lstPagos = new System.Windows.Forms.ListBox();
             this.txtInteresProm = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.diasAtrasoProm = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -70,7 +70,7 @@ namespace DeudasUI
             this.panel1.Controls.Add(this.lbServicio);
             this.panel1.Controls.Add(this.lbTituloPago);
             this.panel1.Controls.Add(this.cbServicio);
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.btnPagar);
             this.panel1.Controls.Add(this.btCalcular);
             this.panel1.Controls.Add(this.txtImporteTotal);
             this.panel1.Controls.Add(this.txtInteresPuni);
@@ -172,14 +172,15 @@ namespace DeudasUI
             this.cbServicio.TabIndex = 7;
             this.cbServicio.SelectedIndexChanged += new System.EventHandler(this.cbServicio_SelectedIndexChanged);
             // 
-            // button2
+            // btnPagar
             // 
-            this.button2.Location = new System.Drawing.Point(19, 312);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(259, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "PAGAR";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnPagar.Location = new System.Drawing.Point(19, 312);
+            this.btnPagar.Name = "btnPagar";
+            this.btnPagar.Size = new System.Drawing.Size(259, 23);
+            this.btnPagar.TabIndex = 6;
+            this.btnPagar.Text = "PAGAR";
+            this.btnPagar.UseVisualStyleBackColor = true;
+            this.btnPagar.Click += new System.EventHandler(this.btnPagar_Click);
             // 
             // btCalcular
             // 
@@ -201,6 +202,7 @@ namespace DeudasUI
             // 
             // txtInteresPuni
             // 
+            this.txtInteresPuni.Enabled = false;
             this.txtInteresPuni.Location = new System.Drawing.Point(178, 248);
             this.txtInteresPuni.Name = "txtInteresPuni";
             this.txtInteresPuni.Size = new System.Drawing.Size(100, 20);
@@ -235,7 +237,7 @@ namespace DeudasUI
             this.panel2.Controls.Add(this.lbTituloMora);
             this.panel2.Controls.Add(this.lstPagos);
             this.panel2.Controls.Add(this.txtInteresProm);
-            this.panel2.Controls.Add(this.textBox6);
+            this.panel2.Controls.Add(this.diasAtrasoProm);
             this.panel2.Location = new System.Drawing.Point(412, 31);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(323, 347);
@@ -285,12 +287,12 @@ namespace DeudasUI
             this.txtInteresProm.Size = new System.Drawing.Size(100, 20);
             this.txtInteresProm.TabIndex = 9;
             // 
-            // textBox6
+            // diasAtrasoProm
             // 
-            this.textBox6.Location = new System.Drawing.Point(201, 277);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 8;
+            this.diasAtrasoProm.Location = new System.Drawing.Point(201, 277);
+            this.diasAtrasoProm.Name = "diasAtrasoProm";
+            this.diasAtrasoProm.Size = new System.Drawing.Size(100, 20);
+            this.diasAtrasoProm.TabIndex = 8;
             // 
             // Cobranza
             // 
@@ -324,7 +326,7 @@ namespace DeudasUI
         private System.Windows.Forms.Label lbServicio;
         private System.Windows.Forms.Label lbTituloPago;
         private System.Windows.Forms.ComboBox cbServicio;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnPagar;
         private System.Windows.Forms.Button btCalcular;
         private System.Windows.Forms.TextBox txtImporteTotal;
         private System.Windows.Forms.TextBox txtInteresPuni;
@@ -336,7 +338,7 @@ namespace DeudasUI
         private System.Windows.Forms.Label lbTituloMora;
         private System.Windows.Forms.ListBox lstPagos;
         private System.Windows.Forms.TextBox txtInteresProm;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox diasAtrasoProm;
     }
 }
 
