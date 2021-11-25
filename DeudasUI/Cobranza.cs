@@ -30,15 +30,15 @@ namespace DeudasUI
         {
             CargaLista();
             CargaComboServicio();
-            Refrescar();
+            Limpiar();
         }
 
         private void CargaLista()
         {
-            _pagos = _PagoServicio.ListarPagosConServicio();
+            _pagos = _PagoServicio.ListarPagos();
             lstPagos.DataSource = null;
             lstPagos.DataSource = _pagos;
-            lstPagos.DisplayMember = "MostrarEnlista";
+            lstPagos.DisplayMember = "MostrarEnLista";
         }
 
         private void CargaComboServicio()
@@ -108,7 +108,7 @@ namespace DeudasUI
         }
         private void Limpiar()
         {
-            cbServicio.SelectedIndex = -1;
+            cbServicio.SelectedIndex =0;
             txtFecPago.Clear();
             txtfecVenc.Clear();
             txtImporteAde.Clear();
@@ -132,9 +132,11 @@ namespace DeudasUI
             {
                 Pago pago = Pago();
                 pago.Usuario = usuario;
+                pago.IdServicio = pago.Servicio.Id;
                 TransactionResult resultado = _PagoServicio.EnviarNuevoPago(pago);
                 MessageBox.Show("Pago exitoso");
                 Refrescar();
+                Limpiar();
             }
             catch(Exception es)
             {
@@ -149,13 +151,18 @@ namespace DeudasUI
             p.ImporteAdeudado = double.Parse(txtImporteAde.Text.ToString());
             p.FechaVencimiento = DateTime.Parse(txtfecVenc.Text);
             p.FechaPago = DateTime.Parse(txtFecPago.Text);
-            p.Servicio.Id = ((Servicio)cbServicio.SelectedItem).Id;
+            p.FechaPago = DateTime.Parse(txtFecPago.Text);
+            p.Servicio = new Servicio();
+            p.Servicio = ServicioHelper.ServicioPorId(((Servicio)cbServicio.SelectedItem).Id);
+            
             p.InteresPunitario = double.Parse(txtInteresPuni.Text);
+            
+            
             return p;
         }
   
         private void Refrescar()
-        {   _pagos= _PagoServicio.ListarPagosConServicio();
+        {   _pagos= _PagoServicio.ListarPagos();
             lstPagos.DataSource = _pagos;
             Calculos();
         }

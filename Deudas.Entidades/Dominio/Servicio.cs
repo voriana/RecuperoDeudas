@@ -13,9 +13,9 @@ namespace Deudas.Entidades.Dominio
         private double _punitarioDiario;
         public Servicio(int id, string nombre, double punitarioDiario)
         {
-            _id = id;
-            _punitarioDiario = punitarioDiario;
-            _nombre = nombre;
+            this._id = id;
+            this._punitarioDiario = punitarioDiario;
+            this._nombre = nombre;
         }
 
 
@@ -24,10 +24,13 @@ namespace Deudas.Entidades.Dominio
            
         }
 
-        
+        public int Id { get => this._id; set => this._id = value; }
+        public double PunitarioDiario { get => this._punitarioDiario; set => this._punitarioDiario = value; }
+        public string Nombre { get => this._nombre; set => this._nombre = value; }
 
-        public int Id { get => _id; set => _id = value; }
-        public double PunitarioDiario { get => _punitarioDiario; set => _punitarioDiario = value; }
-        public string Nombre { get => _nombre; set => _nombre = value; }
+        public override string ToString()
+        {
+            return $"Id{this._id}-{this._nombre}";
+        }
     }
 }

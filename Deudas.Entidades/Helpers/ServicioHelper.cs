@@ -31,7 +31,7 @@ namespace Deudas.Entidades.Helpers
 
         public static Servicio ServicioPorId(int cod)
         {
-            Servicio servicio = null;
+            Servicio servicio = new Servicio();
             foreach(Servicio serv in _lstServicio)
             {
                 if (serv.Id == cod)

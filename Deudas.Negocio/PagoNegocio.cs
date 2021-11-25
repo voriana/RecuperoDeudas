@@ -22,13 +22,7 @@ namespace Deudas.Negocio
             _servicios = new List<Servicio>();
         }
 
-        public List<Pago> ListaPagos()
-        {
-            _pagos= _pagoMapper.GetPagos();
-            return _pagos;
-        }
-
-       public List<Pago> ListarPagosConServicio()
+       public List<Pago> ListarPagos()
        {
             _pagos = _pagoMapper.GetPagos();
             foreach(Pago pago in _pagos)
