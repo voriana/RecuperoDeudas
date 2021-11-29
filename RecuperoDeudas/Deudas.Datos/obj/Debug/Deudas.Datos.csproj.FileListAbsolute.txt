@@ -1,0 +1,11 @@
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Datos\bin\Debug\Deudas.Datos.dll
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Datos\bin\Debug\Deudas.Datos.pdb
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Datos\bin\Debug\Deudas.Entidades.dll
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Datos\bin\Debug\Deudas.Entidades.pdb
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Datos\obj\Debug\Deudas.Datos.csproj.AssemblyReference.cache
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Datos\obj\Debug\Deudas.Datos.csproj.CoreCompileInputs.cache
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Datos\obj\Debug\Deudas.Datos.dll
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Datos\obj\Debug\Deudas.Datos.pdb
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Datos\bin\Debug\Newtonsoft.Json.dll
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Datos\bin\Debug\Newtonsoft.Json.xml
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Datos\obj\Debug\Deudas.Datos.csproj.CopyComplete

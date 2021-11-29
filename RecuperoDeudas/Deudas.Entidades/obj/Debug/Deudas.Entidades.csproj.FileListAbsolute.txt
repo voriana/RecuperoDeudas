@@ -1,0 +1,6 @@
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Entidades\bin\Debug\Deudas.Entidades.dll
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Entidades\bin\Debug\Deudas.Entidades.pdb
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Entidades\obj\Debug\Deudas.Entidades.csproj.AssemblyReference.cache
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Entidades\obj\Debug\Deudas.Entidades.csproj.CoreCompileInputs.cache
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Entidades\obj\Debug\Deudas.Entidades.dll
+C:\Users\orian\Documents\GitHub\RecuperoDeudas\RecuperoDeudas\Deudas.Entidades\obj\Debug\Deudas.Entidades.pdb
